@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 
 public class MainMenuForm extends JFrame {
 
-    private GoogleMapsService googleMapsService;
 
     public MainMenuForm(int i) {
         // Grundläggande inställningar för fönstret
@@ -18,7 +17,6 @@ public class MainMenuForm extends JFrame {
         setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));  // Vertikal layout
 
         // Skapa GoogleMapsService för att hantera geolokalisering och söka efter utegym
-        googleMapsService = new GoogleMapsService();
 
         // Skapa gamla knappar för kaloriloggen och statistik
         JButton calorieLogButton = new JButton("Logga kalorier");
@@ -54,9 +52,6 @@ public class MainMenuForm extends JFrame {
                 double userLat = 55.604981;  // Latitud för Malmö
                 double userLng = 13.003822;  // Longitud för Malmö
 
-                // Hämta närmaste utegym från Google Places API
-                String response = googleMapsService.getNearbyOutdoorGyms(userLat, userLng);
-                JOptionPane.showMessageDialog(null, response);
             }
         });
 
