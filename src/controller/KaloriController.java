@@ -64,4 +64,27 @@ public class KaloriController {
         }
         return 0;
     }
+    
+    public int hämtaKalorierSenaste7Dagar(int kontoID) {
+        String sql = "SELECT SUM(kalorier) FROM Kalorier WHERE kontoID = ? AND datum >= ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, kontoID);
+            stmt.setDate(2, Date.valueOf(LocalDate.now().minusDays(6)));
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+
 }
